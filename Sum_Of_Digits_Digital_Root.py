@@ -11,7 +11,7 @@ from math import log10
 #     return ret
 # def num_to_list_comprehension(n):
 # return [n % 10 for _ in range(int(math.log10(n) + 1))][::-1] almost ):
-# num_to_lst = lambda n: [n % 10].append(num_to_lst(n//10)) if int(math.log10(n)+1) != 1 else [n % 10]
+# num_to_lst = lambda n : [n % 10].append(num_to_lst(n//10)) if int(math.log10(n)+1) != 1 else [n % 10]
 
 
 def digital_root(n):
