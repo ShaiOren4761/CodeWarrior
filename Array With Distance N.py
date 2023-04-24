@@ -17,33 +17,18 @@
 def generate(num):
     if not num:
         return [0]
-    if num % 2 == 0:
-        des_odd = [x for x in range(num+1) if x % 2][::-1]
-
-        big_even = [num]
-
-        asc_odd = des_odd.copy()[::-1]
-
-        des_even = [x for x in range(num-1) if x % 2 == 0 and x][::-1]
-
-        big_even_zero = [0, num]
-
-        asc_even = des_even.copy()[::-1]
-
-        return des_odd + big_even + asc_odd + des_even + big_even_zero + asc_even
+    elif num == 1:
+        return [1, 0, 1]
     else:
         des_odd = [x for x in range(num+1) if x % 2][::-1]
 
-        big_even = [num-1]
+        big_even = [num] if not num % 2 else [num-1]
 
         asc_odd = des_odd.copy()[::-1]
 
         des_even = [x for x in range(num-1) if x % 2 == 0 and x][::-1]
 
-        if num != 1:
-            big_even_zero = [num-1, 0]
-        else:
-            big_even_zero = []
+        big_even_zero = [0, num] if not num % 2 else [num-1, 0]
 
         asc_even = des_even.copy()[::-1]
 
@@ -52,4 +37,5 @@ def generate(num):
 
 for i in range(9, 11):
     print(f'i = {i} , {generate(i)}')
+
 
