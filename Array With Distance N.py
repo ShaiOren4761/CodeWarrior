@@ -1,3 +1,4 @@
+# https://www.codewars.com/kata/6421c6b71e5beb000fc58a3e
 # [0]
 # [1,0,1]
 # [1,2,1,0,2]
@@ -12,13 +13,11 @@
 # len = n*2 + 1
 
 # [descending odd - the biggest even - ascending odd -
-# descending even(not including biggest!) -0/biggest even - rising even()not including biggest!]
+# descending even(not including biggest!) -0/biggest even - rising even(not including biggest!)]
 
 def generate(num):
     if not num:
         return [0]
-    elif num == 1:
-        return [1, 0, 1]
     else:
         des_odd = [x for x in range(num+1) if x % 2][::-1]
 
@@ -28,7 +27,7 @@ def generate(num):
 
         des_even = [x for x in range(num-1) if x % 2 == 0 and x][::-1]
 
-        big_even_zero = [0, num] if not num % 2 else [num-1, 0]
+        big_even_zero = [0, num] if not num % 2 else [num-1, 0] if num != 1 or 0 else []
 
         asc_even = des_even.copy()[::-1]
 
