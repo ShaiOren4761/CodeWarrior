@@ -11,9 +11,9 @@
 
 
 def Check_Prime(n):
-    n = abs(n)
-    if n == 1 or n == 0:
+    if n <= 1:
         return False
+    n = abs(n)
     for i in range(2, int(n ** 0.5)+1):
         if not n % i:
             return False
