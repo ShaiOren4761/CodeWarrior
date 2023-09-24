@@ -8,6 +8,52 @@ class ListNode(object):
 
 
 class Solution(object):
+    def addTwoNumbers_horrible_first_try_SUPERLONG(self, l1, l2):
+        # Are there numbers to combine?
+        if not l1 and not l2:  # No numbers left, end loop.
+            return None
+
+        elif not l1:  # Number on l2, save it and continue.
+            save_num = l2.val % 10
+            remember_num = save_num // 10
+            l2 = l2.next
+            if l2:
+                l2.val = l2.val + remember_num
+            return ListNode(save_num, self.addTwoNumbers(l1, l2))
+
+        elif not l2:  # Number on l1, save it and continue.
+            save_num = l1.val % 10
+            remember_num = save_num // 10
+            l1 = l1.next
+            if l1:
+                l1.val = l1.val + remember_num
+            return ListNode(save_num, self.addTwoNumbers(l1, l2))
+
+        # Addition of numbers, splitting the answer into 2 -
+        num = l1.val + l2.val
+        save_num = num % 10  # The number to be saved in the node
+        remember_num = num // 10  # The number to be sent to the next node "carrying"
+
+        # Numbers used, move nodes to next values.
+        l1 = l1.next
+        l2 = l2.next
+
+        # Who is going to carry the number?
+
+        # if both nodes are None, make the carry the next value and end the loop.
+        if not l1 and not l2:
+            return ListNode(save_num, ListNode(remember_num, None) if remember_num else None)
+        # l2 has a value, use it to carry the number.
+        elif not l1:
+            return ListNode(save_num, self.addTwoNumbers(ListNode(remember_num, None), l2))
+        # l1 has a value, use it to carry the number.
+        elif not l2:
+            return ListNode(save_num, self.addTwoNumbers(l1, ListNode(remember_num, None)))
+        # Both have a value, l1 has been selected to carry.
+        else:
+            l1.val = l1.val + remember_num
+            return ListNode(save_num, self.addTwoNumbers(l1, l2))
+
     def addTwoNumbers(self, l1, l2):
         # Are there numbers to combine?
         if not l1 and not l2:  # No numbers left, end loop.
@@ -42,7 +88,7 @@ class Solution(object):
 
         # if both nodes are None, make the carry the next value and end the loop.
         if not l1 and not l2:
-            return ListNode(save_num, ListNode(remember_num, None))
+            return ListNode(save_num, ListNode(remember_num, None) if remember_num else None)
         # l2 has a value, use it to carry the number.
         elif not l1:
             return ListNode(save_num, self.addTwoNumbers(ListNode(remember_num, None), l2))
@@ -55,9 +101,8 @@ class Solution(object):
             return ListNode(save_num, self.addTwoNumbers(l1, l2))
 
 
-
-ln1 = ListNode(1, ListNode(2, ListNode(3, ListNode(3)))) # 321
-ln2 = ListNode(2, ListNode(3, ListNode(4))) # 432
+ln1 = ListNode(1, ListNode(2, ListNode(3, ListNode(3))))  # 321
+ln2 = ListNode(2, ListNode(3, ListNode(4)))  # 432
 # 321 + 432 = 753
 
 ln3 = ListNode(9, ListNode(9, ListNode(9, ListNode(9, ListNode(9, ListNode(9, ListNode(9)))))))  # 9,999,999
